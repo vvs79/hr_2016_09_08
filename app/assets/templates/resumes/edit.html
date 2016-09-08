@@ -1,0 +1,69 @@
+<div class="editPerson show_div">
+    <form class="updateForm">
+        <div class="form-group inline">
+            <label for="">Name</label>
+            <input type="text" class="form-control" name="personName" ng-model="person.name"/>
+        </div>
+
+        <!--div class="form-group inline">
+            <label for="">Skill</label>
+            <input type="text" class="form-control" name="personSkill" ng-model="person.skill"/>
+        </div-->
+
+        <div class="form-group inline">
+            <label for="">Date of Birth</label>
+            <input type="date" class="form-control" name="personDate" ng-model="person.dateOfBirth"/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">Age</label>
+            <input type="number" class="form-control" name="personAge" ng-model="person.age"/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">City</label>
+            <input type="text" class="form-control" name="personCity" ng-model="person.city"/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">Phone</label>
+            <input type="text" class="form-control" name="personPhone" ng-model="person.phone"/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">Skype</label>
+            <input type="text" class="form-control" name="personSkype" ng-model="person.skype"/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">Email</label>
+            <input type="email" class="form-control" name="personEmail" ng-model="person.email"/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">Salary</label>
+            <input type="number" class="form-control" name="personSalary" ng-model="person.salary"/>
+        </div>
+
+        <!--div class="form-group border">
+            <h4>Професія</h4>
+            <div class="checkbox">
+                <p ng-repeat="proff in checkboxProff">
+                    <label><input type="checkbox" name="editProff" value="{{proff.name}}" ng-model="proff.selected">{{proff.name}}</label>
+                </p>
+            </div><hr/>
+            <h4>Статус</h4>
+            <div class="checkbox">
+                <p ng-repeat="st in checkboxStatus">
+                    <label><input type="checkbox" name="editStatus" value="{{st.id}}" ng-model="st.selected">{{st.name}}</label>
+                </p>
+            </div>
+        </div-->
+
+      <br/>
+      <a href="#{{person.id}}/show">
+        <button type="submit" class="btn btn-warning edit" ng-click="editResume(person)">Edit</button>&nbsp;&nbsp;&nbsp;
+        <button type="submit" class="btn btn-success edit" >Show</button>
+      </a>
+    </form><br/>
+</div>

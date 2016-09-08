@@ -1,0 +1,18 @@
+<div ng-controller="ResumeCtrl">
+  <h1>All resumes 0</h1>
+  <form ng-submit="addResume()">
+    <input type="text" ng-model="newResume.name">
+    <input type="submit" value="Add">
+  </form>
+  <hr/>
+  <table>
+    <tbody>
+      <tr ng-repeat="x in resumes">
+        <td>
+          {{x.name}} --- name
+          <a ng-click="removeResume(x)">X</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

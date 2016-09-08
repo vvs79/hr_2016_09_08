@@ -1,0 +1,43 @@
+<div class= "dv">
+  <h1>All resumes</h1>
+  <!--form ng-submit="addResume()">
+    <input type="text" ng-model="newResume.name">
+    <input type="submit" value="Add">
+  </form-->
+  <hr/>
+  <div class="person resume_block" ng-repeat="p in resumes | filter:queryPerson | orderBy:sortEl">
+    <div class="comm_div">
+      <p class="text-center commun">Date: date - Mark: mark</p>
+    </div>
+      <p class="text-center bolder">Name: {{p.name}}</p>
+      <p class="text-center">Phone: {{p.phone}}</p>
+      <p class="text-center">Skype: {{p.skype}}</p>
+      <p class="text-center bolder">Skills: {{p.skill}}</p>
+      <p class="text-center">Money: {{p.salary}} uhr</p>
+      <p class="text-center">ID: {{p.id}}</p>
+    <div class="text-center">
+    <p>
+      <a href="#{{p.id}}/show">
+        <input type="button" class="btn btn-primary" value="Show"/>
+      </a>
+      <a href="#{{p.id}}/edit">
+        <button type="button" class="btn btn-primary" ng-click="">Edit</button>
+      </a>
+      <a href="#/">
+        <button type="button" class="btn btn-primary" ng-click="removeResume(p)">Delete</button>
+      </a>
+    </p>
+  </div>
+</div>
+  <!--table class="resumes">
+    <tbody>
+      <tr ng-repeat="r in resumes">
+        <td>
+          {{r.name}}
+          <a ng-click="removeResume(r)" class="btn btn-danger">X</a>
+          <br/><br/>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div-->
