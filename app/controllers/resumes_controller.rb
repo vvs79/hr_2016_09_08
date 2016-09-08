@@ -9,46 +9,47 @@ class ResumesController < ApplicationController
     respond_with Resume.all
   end
 
-  # def new
-  #   @resume = Resume.new
-  # end
+  def new
+    respond_with Resume.new
+  end
 
   def show
     respond_with Resume.find params[:id]
-  #   @resume = Resume.find(params[:id])
-  # rescue ActiveRecord::RecordNotFound
-  #   flash[:danger] = 'Person does not exist!'
-  #   redirect_to resumes_path
+  rescue ActiveRecord::RecordNotFound
+    render json: { message: "SHOW Resume doesn't exist!" }, status: 404
   end
 
   def create
-    respond_with Resume.create resume_params
-    # @person = Resume.new(resume_params)
-    # if @person.save
-    #   redirect_to resume_path(@resume)
-    # else
-    #   render 'new'
-    # end
+    @resume = Resume.new(resume_params)
+    if @resume.save
+      render json: { response: "Resume was successfully created" }
+    else
+      render json: { error: "Resume wasn't created!" }
+    end
   end
 
   def edit
     respond_with Resume.find params[:id]
-  #   @resume = Resume.find(params[:id])
-  #   respond_with @resume
-  # rescue ActiveRecord::RecordNotFound
-  #   render json: { error: "Resume doesn't exist!" }, status: 404
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "EDIT Resume doesn't exist!" }, status: 404
+  end
+
+  def update
+    @resume = Resume.find(params[:id])
+    if @resume.update(resume_params)
+      render json: { response: "UPDATE Resume was successfully updated" }, status: 200
+    end
   end
 
   def destroy
     respond_with Resume.destroy params[:id]
-    # Resume.find(params[:id]).destroy
-    # flash[:success] = 'Resume deleted'
-    # redirect_to resumes_path
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "DEL Resume doesn't exist!" }, status: 404
   end
 
   private
 
     def resume_params
-      params.require(:resume).permit(:name, :age)
+      params.require(:resume).permit(:name, :age, :email, :skype, :salary, :city, :phone, :dateofbirth, :comment, :proffession, :status)
     end
 end
