@@ -1,5 +1,94 @@
 <div class= "dv">
-  <h1>All resumes</h1>
+
+  <div class="addPerson">
+    <hr/>
+    <p class="blue">
+    <div class="inline">
+      <a href="#new">
+        <button type="button" class="btn btn-default" ng-click="person={}">Додати резюме</button>
+      </a>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <div class="ext_sel inline">
+    <div class="top_border inline">
+      <label> Професія: </label>
+      <div class="select_width inline">
+        <select id="proff" class="form-control inline">
+          <option class="selProff" value="Front-end">Front-end ({{count_front}})</option>
+          <option class="selProff" value="Back-end">Back-end ({{count_back}})</option>
+        </select>
+      </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <label> Статус резюме:
+        <div class="select_width inline">
+          <select class="form-control inline" id="status">
+            <option class="selStatus" value="New">Нові ({{count_new}})</option>
+            <option class="selStatus" value="Consider">В розгляді ({{count_consider}})</option>
+            <option class="selStatus" value="Yes">Пройшли співбесіду ({{count_yes}})</option>
+            <option class="selStatus" value="Reserve">Резерв ({{count_reserve}})</option>
+            <option class="selStatus" value="Refused">Відмовилися ({{count_refused}})</option>
+            <option class="selStatus" value="No">Не підходять ({{count_no}})</option>
+          </select>
+        </div>
+      </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#select">
+        <input type="button" class="btn btn-default" ng-click="extSelect()" value="Розширений перегляд"/>
+      </a>
+    </div>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Всього: {{counter}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" ng-show="searchAllow" ng-model="queryPerson" placeholder="Search..."/>
+    <input type="button" class="btn btn-default" value={{searchVal}} ng-click="searchFunc()" />
+    &nbsp;&nbsp;&nbsp;
+
+    <div class="dropdown inline" id="sort">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="true">
+        СОРТУВАННЯ
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li class="proff"><a href="#/" class="sort" ng-click="sortEl = 'name'">Name</a></li>
+        <li class="proff"><a href="#/" class="sort" ng-click="sortEl = 'age'">Age</a></li>
+        <li class="proff"><a href="#/" class="sort" ng-click="sortEl = 'skill'">Skill</a></li>
+      </ul>
+    </div>&nbsp;&nbsp;&nbsp;
+
+    <div class="dropdown inline">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="true">
+        НАЛАШТУВАННЯ
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+        <li class="proff red"><a href="#/" class="" ng-click="settings('red')">Red</a></li>
+        <li class="proff blue"><a href="#/" class="" ng-click="settings('blue')">Blue</a></li>
+        <li class="proff yellow"><a href="#/" class="" ng-click="settings('yellow')">Yellow</a></li>
+        <li class="proff color"><a href="#/" class="" ng-click="settings('color')">Cool</a></li>
+      </ul>
+    </div>
+
+    &nbsp;&nbsp;&nbsp;<a class="hidden" href="#/">НАЛАШТУВАННЯ</a>&nbsp;&nbsp;&nbsp;
+    <a href="#/">
+      <input type="button" class="btn btn-default" value="ВСІ РЕЗЮМЕ" ng-click="allFunc()"/>
+    </a>
+
+    <div class="dropdown inline hidden">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Вибрати
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li class="proff" ng-repeat="x in persons">name: {{x.name}}</li>
+      </ul>
+    </div>&nbsp;&nbsp;&nbsp;
+    <a class="hidden" href="#delete">DELETE</a>
+  </p>
+  <hr/>
+
+
+
+
+
   <p>
     <a href="#new">
       <input type="button" class="btn btn-primary" value="New"/>

@@ -11,12 +11,13 @@ Rails.application.routes.draw do
     resources :users
   end
 
-
-
-
   # devise_for :users
   root 'resumes#index'
   resources :resumes
+
+  resources :educations# , only: [:index]
+  resources :experiences# , only: [:index]
+  resources :communications
 
   get '*a' => 'static_pages#error'
 

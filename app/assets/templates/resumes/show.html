@@ -1,6 +1,5 @@
 <div class="show_div">
   <p>Name: <span class="bolder">{{person.name}}</span></p>
-  <!--p>Skills: <span class="bolder">{{person.skill}}</span></p-->
   <p>Date of Birth: <span>{{person.dateOfBirth}}</span></p>
   <p>Age: <span>{{person.age}}</span></p>
   <p>City: <span>{{person.city}}</span></p>
@@ -10,9 +9,20 @@
   <p>Salary: <span>{{person.salary}} uhr</span></p>
   <p>Proffession: <span>{{person.proffession}}</span></p>
   <p>Status: <span>{{person.status}}</span></p>
+  <p>Skill: <span>{{person.skill}}</span></p>
+  <p>Language: <span>{{person.language}}</span></p>
+  <p>Level: <span>{{person.level}}</span></p>
+  <p>Work: <span>{{person.work}}</span></p>
+  <p>Proff: <span>{{person.proff}}</span></p>
+  <p>Communication: <span ng-repeat='c in comm'>{{c.date}} : {{c.mark}}<br/></span></p>
+  <p>Comment: <span>{{person.comment}}</span></p>
+  <p>Education: <span ng-repeat='ed in educ'>{{ed.specialty}} : {{ed.from}} : {{ed.to}} : {{ed.place}}<br/></span></p>
+  <p>Experience: <span ng-repeat='ex in exp'>{{ex.specialty}} : {{ex.from}} : {{ex.to}} : {{ex.place}}<br/></span></p>
+
   <p>
     <a href="#{{person.id}}/edit">
-      <button type="button" class="btn btn-default">Edit</button>
-    </a>
+      <button type="button" class="btn btn-warning">Edit</button>
+    </a>&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-danger" ng-click="removeResume(person)">Delete</button>
   </p>
 </div>

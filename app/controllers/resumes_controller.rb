@@ -22,7 +22,7 @@ class ResumesController < ApplicationController
   def create
     @resume = Resume.new(resume_params)
     if @resume.save
-      render json: { response: "Resume was successfully created" }
+      render json: { id: @resume.id }
     else
       render json: { error: "Resume wasn't created!" }
     end
@@ -38,6 +38,8 @@ class ResumesController < ApplicationController
     @resume = Resume.find(params[:id])
     if @resume.update(resume_params)
       render json: { response: "UPDATE Resume was successfully updated" }, status: 200
+    else
+      render json: { error: "Resume wasn't updated!" }
     end
   end
 
@@ -50,6 +52,6 @@ class ResumesController < ApplicationController
   private
 
     def resume_params
-      params.require(:resume).permit(:name, :age, :email, :skype, :salary, :city, :phone, :dateofbirth, :comment, :proffession, :status)
+      params.require(:resume).permit(:name, :age, :email, :skype, :salary, :city, :phone, :dateofbirth, :comment, :proffession, :status, :skill, :work, :proff, :language, :level)
     end
 end

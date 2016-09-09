@@ -12,13 +12,8 @@
         </div>
         <div class="form-group inline">
             <label for="">Name</label>
-            <input type="text" class="form-control" name="personName" ng-model="newPerson.name"/>
+            <input type="text" class="form-control" name="personName" ng-model="newPerson.name" required />
         </div>
-
-        <!--div class="form-group inline">
-            <label for="">Skill</label>
-            <input type="text" class="form-control" name="personSkill" ng-model="newPerson.skill"/>
-        </div-->
 
         <div class="form-group inline">
             <label for="">Date of Birth</label>
@@ -53,9 +48,99 @@
         <div class="form-group inline">
             <label for="">Salary</label>
             <input type="number" class="form-control" name="personSalary" ng-model="newPerson.salary"/>
+        </div><br/>
+
+        <div class="form-group inline" id="allSkills">
+            <label for="">Skill</label>
+            <input type="text" class="form-control" name="personSkill" placeholder="Скіли"/>
+        </div>
+        <div class="form-group inline">
+          <input type="button" value="+" class="addSkill" ng-click="addSkill()"/>
+        </div>&nbsp;&nbsp;&nbsp;
+
+        <div class="form-group inline" id="allProffs">
+          <label for="">Професійні навички</label>
+          <input type="text" class="form-control" name="personProff" placeholder="Професійні навички"/>
+        </div>
+        <div class="form-group inline">
+          <input type="button" value="+" class="addProff" ng-click="addProff()"/>
+        </div>&nbsp;&nbsp;&nbsp;
+
+        <div class="form-group inline border">
+          <h4>Зайнятість</h4>
+          <div class="checkbox">
+            <label><input type="checkbox" name="personWork" value="full"/>Повна зайнятість</label><br/>
+            <label><input type="checkbox" name="personWork" value="no_full"/>Неповна зайнятість</label><br/>
+            <label><input type="checkbox" name="personWork" value="distance"/>Дистанційна робота</label><br/>
+          </div>
         </div>
 
-        <div class="form-group border">
+        <br/>
+
+        <div class="form-group inline border" id="allLangs">
+          <h4 for="">Language</h4>
+          <select class="form-control" name="lang">
+            <option>language</option>
+            <option>Англійська</option>
+            <option>Російська</option>
+            <option>Німецька</option>
+            <option>Французька</option>
+            <option>Італійська</option>
+            <option>Польська</option>
+            <option>Іспанська</option>
+            <option>Португальська</option>
+          </select><br/>
+          <select class="form-control" name="langLevel">
+            <option>level</option>
+            <option>Високий</option>
+            <option>Вище середнього</option>
+            <option>Середній</option>
+            <option>Нище середнього</option>
+            <option>Низький</option>
+          </select><br/>
+        </div>
+        <div class="form-group inline">
+          <input type="button" value="+" class="addLang" ng-click="addLang()"/>
+        </div>&nbsp;&nbsp;&nbsp;
+
+        <div class="form-group inline border" id="allCommuns">
+          <h4 for="">Співбесіда</h4>
+          <input type="date" class="form-control" name="communDate" placeholder="Дата"/><br/>
+          <input type="number" class="form-control" name="communValue" placeholder="Кількість балів"/><br/>
+        </div>
+        <div class="form-group inline">
+          <input type="button" value="+" class="addCommun" ng-click="addCommun()"/>
+        </div>
+
+        <br/>
+
+        <div class="form-group inline border" id="allEduc">
+          <h4 for="">Education</h4>
+          <input type="text" class="form-control" name="education" placeholder="Спеціальність"/>
+          <label for="">From</label>
+          <input type="date" class="form-control" name="educationFrom" placeholder="Навчався З"/>
+          <label for="">To</label>
+          <input type="date" class="form-control" name="educationTo" placeholder="Навчався До"/><br/>
+          <input type="text" class="form-control" name="educationPlace" placeholder="Навчальний заклад"/>
+        </div>
+        <div class="form-group inline">
+          <input type="button" value="+" class="addEduc" ng-click="addEduc()"/>
+        </div>&nbsp;&nbsp;&nbsp;
+
+        <div class="form-group inline border" id="allJobs">
+          <h4 for="">Experience</h4>
+          <input type="text" class="form-control" name="job" placeholder="Спеціальність"/>
+          <label for="">From</label>
+          <input type="date" class="form-control" name="jobFrom" placeholder="Працював З"/>
+          <label for="">To</label>
+          <input type="date" class="form-control" name="jobTo" placeholder="Працював До"/><br/>
+          <input type="text" class="form-control" name="jobPlace" placeholder="Місце роботи"/>
+        </div>
+        <div class="form-group inline">
+          <input type="button" value="+" class="addJob" ng-click="addJob()"/>
+        </div>&nbsp;&nbsp;&nbsp;
+
+        <div class="form-group border inline">
             <h4>Професія</h4>
             <div class="checkbox">
                 <label><input type="checkbox" name="proffession" value="Front-end"/>Front-end</label><br/>
@@ -72,6 +157,12 @@
             </div>
         </div>
 
+        <br/>
+        <div class="" id="comment">
+          <h4 for="">Коментарі</h4>
+          <textarea class="form-control" rows="7" name="comment"></textarea>
+        </div>
+        <br/>
       <!--a href="#/"-->
         <button type="submit" class="btn btn-warning edit" ng-click="addResume()">Create</button>
       <!--/a-->
