@@ -100,10 +100,10 @@
     <input type="submit" value="Add">
   </form-->
   <hr/>
-  <div class="person resume_block" ng-repeat="p in resumes">
-    <div class="" ng-repeat="c in p.communications">
+  <div class="person resume_block" ng-repeat="p in resumes | filter:queryPerson | orderBy:sortEl">
+    <div class="comm_div">
       <!--input type='button' class='btn btn-default' value='Communications'/-->
-      <p class="text-center commun">Date: {{c.date}} - Mark: {{c.mark}}</p>
+      <p class="text-center commun" ng-repeat="c in p.communications">Date: {{c.date}} - Mark: {{c.mark}}</p>
       <!--p class="text-center commun" ng-repeat="comm in pers[1]">{{comm.date}} : {{comm.mark}}</p-->
     </div>
 
@@ -113,7 +113,7 @@
       <p class="text-center">Skype: {{p.skype}}</p>
       <p class="text-center bolder">Skills: {{p.skill}}</p>
       <p class="text-center">Money: {{p.salary}} uhr</p>
-      <p class="text-center">ID: {{p.id}}</p>
+      <!--p class="text-center">ID: {{p.id}}</p-->
       <div class="text-center">
         <p>
           <a href="#{{p.id}}">

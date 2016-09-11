@@ -34,7 +34,7 @@ class ResumesController < ApplicationController
 
   def show
     @resume = Resume.find params[:id]
-    @data = { education: @resume.educations, experience: @resume.experiences, resume: @resume }
+    @data = { communication: @resume.communications, education: @resume.educations, experience: @resume.experiences, resume: @resume }
     respond_with @data
   rescue ActiveRecord::RecordNotFound
     render json: { message: "SHOW Resume doesn't exist!" }, status: 404
@@ -51,7 +51,7 @@ class ResumesController < ApplicationController
 
   def edit
     @resume = Resume.find params[:id]
-    @data = { education: @resume.educations, experience: @resume.experiences, resume: @resume }
+    @data = { communication: @resume.communications, education: @resume.educations, experience: @resume.experiences, resume: @resume }
     respond_with @data
   rescue ActiveRecord::RecordNotFound
     render json: { error: "EDIT Resume doesn't exist!" }, status: 404

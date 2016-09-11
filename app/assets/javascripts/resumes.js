@@ -63,34 +63,7 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
   $scope.resumes = Resume.query(function(){ $scope.counter = $scope.resumes.length;
                                             //alert('$scope.resumes - ' + JSON.stringify($scope.resumes[13]));
                                              });
-  //$scope.counter = $scope.resumes.length;
-  //$scope.comm = 'no';
-
-
-  //$scope.getComm = function(id) { Resume.get({id: id}).$promise
-    //.then(
-      //function (success) {
-        //$scope.comm = id;
-        //$scope.comm = (success.communications) ? success.communications : {};
-        //$scope.comm = (JSON.stringify(success.communications)) ? JSON.stringify(success.communications) : 0;
-      //},
-      //function(error) {
-        //
-      //}
-    //);
-  //};
-
-  // $scope.educ = Education.query(function(){
-  //   for (var i=0;i<$scope.educ.length;i++) {if ($scope.educ[i].resume_id != $routeParams.id) { $scope.educ.splice(i, 1); --i; }}
-  // });
-
-  // $scope.getComm = function(person) {
-  //   var dates = person.date.split(','), marks = person.mark.split(','), $scope.dm = [], i;
-  //   for (i=0;i<dates.length;++i) {
-      
-  //   }
-  // }
-  
+  //$scope.comm = (JSON.stringify(success.communications)) ? JSON.stringify(success.communications) : 0;
 
   $scope.queryPerson = "";
   $scope.searchAllow = false;
@@ -189,20 +162,6 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
     for (i=0; i<=(skills.length-2); i++) { skills[i].parentNode.removeChild(skills[i]); }
     $scope.newPerson.skill= (str_skills) ? str_skills.slice(0, -1) : "";
 
-    var dates = document.getElementsByName("communDate"), str_dates = "",
-        marks = document.getElementsByName("communValue"), str_marks = "";
-    for (i=0; i<dates.length; i++) { if (dates[i].value && marks[i].value) {
-                                      str_dates += (dates[i].value.toString() + ',');
-                                      str_marks += (marks[i].value.toString() + ',');
-                                      dates[i].value = marks[i].value = "";
-                                    }
-    }
-    if (dates.length > 1) {
-      var comm_div = document.getElementsByClassName("commDiv");
-      for (i=0;i<=(dates.length-2);++i) { comm_div[0].parentNode.removeChild(comm_div[0]);} }
-    $scope.newPerson.date = (str_dates) ? str_dates.slice(0, -1) : "";
-    $scope.newPerson.mark = (str_marks) ? str_marks.slice(0, -1) : "";
-
     var proffs = document.getElementsByName("personProff"), str_proffs = "";
     for (i=0; i<proffs.length; i++) { if (proffs[i].value) { str_proffs += (proffs[i].value + ','); proffs[i].value = ""; } }
     for (i=0; i<=(proffs.length-2); i++) { proffs[i].parentNode.removeChild(proffs[i]); }
@@ -256,16 +215,15 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
               for (i=0;i<=(counter_job-2);++i) { job_div[0].parentNode.removeChild(job_div[0]);}
             }
 
-            // var date = document.getElementsByName("communDate"), mark =  document.getElementsByName("communValue");
-            // for (i=0;i<date.length;++i) {
-            //   Communication.save({date: date[i].value, mark: mark[i].value, resume_id: success.id}); 
-            // }
-            // for (i=0;i<date.length;++i) { date[i].value = mark[i].value = ""; }
-            // if (date.length > 1) {
-            //   var comm_div = document.getElementsByClassName("commDiv");
-            //   for (i=0;i<=(counter_comm-2);++i) { comm_div[0].parentNode.removeChild(comm_div[0]);}
-            // }
-
+            var date = document.getElementsByName("communDate"), mark =  document.getElementsByName("communValue");
+            for (i=0;i<date.length;++i) {
+              Communication.save({date: date[i].value, mark: mark[i].value, resume_id: success.id}); 
+            }
+            for (i=0;i<date.length;++i) { date[i].value = mark[i].value = ""; }
+            if (date.length > 1) {
+              var comm_div = document.getElementsByClassName("commDiv");
+              for (i=0;i<=(counter_comm-2);++i) { comm_div[0].parentNode.removeChild(comm_div[0]);}
+            }
 
             $scope.newResume = {};
             $window.location.href = '/#/'+success.id;
@@ -341,6 +299,7 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
           $scope.person = success.resume;
           $scope.educ = success.education;
           $scope.exp = success.experience;
+          $scope.comm = success.communication;
 
           var i, j, arr_proffessions = [], arr_status = [];
 
@@ -399,6 +358,7 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
           $scope.person = success.resume;
           $scope.educ = success.education;
           $scope.exp = success.experience;
+          $scope.comm = success.communication;
 
         },
         function(error) {
