@@ -18,6 +18,7 @@
 //= require angular-route
 //= require angular-rails-templates
 //= require resumes
+//= ng-load
 //= require ui-bootstrap
 //= require_tree .
 //= require_tree ../templates

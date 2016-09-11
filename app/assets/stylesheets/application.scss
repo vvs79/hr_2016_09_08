@@ -576,6 +576,11 @@ input[type=radio] {
   padding: 0;
 }
 
+
+
+
+
+
 .inline, .resume_block, .show_div {
   display: inline-block;
 }
@@ -613,7 +618,7 @@ input[type=radio] {
 
 .ext_sel {
   border: 1px yellow solid;
-  padding: 3px;
+  padding: 3px 2px 0 2px;
   background: #b09bff;
 }
 
@@ -650,3 +655,6 @@ a:hover {
   text-decoration:none;
 }
 
+.select_width {
+  height: 35px;
+}

@@ -10,7 +10,7 @@
     </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
     <div class="ext_sel inline">
-    <div class="top_border inline">
+     <div class="top_border inline">
       <label> Професія: </label>
       <div class="select_width inline">
         <select id="proff" class="form-control inline">
@@ -36,6 +36,7 @@
     </div>
     </div>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Всього: {{counter}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <br/><br/>
     <input type="text" ng-show="searchAllow" ng-model="queryPerson" placeholder="Search..."/>
     <input type="button" class="btn btn-default" value={{searchVal}} ng-click="searchFunc()" />
     &nbsp;&nbsp;&nbsp;
@@ -99,28 +100,34 @@
     <input type="submit" value="Add">
   </form-->
   <hr/>
-  <div class="person resume_block" ng-repeat="p in resumes | filter:queryPerson | orderBy:sortEl">
-    <div class="comm_div">
-      <p class="text-center commun">Date: date - Mark: mark</p>
+  <div class="person resume_block" ng-repeat="p in resumes">
+    <div class="" ng-repeat="c in p.communications">
+      <!--input type='button' class='btn btn-default' value='Communications'/-->
+      <p class="text-center commun">Date: {{c.date}} - Mark: {{c.mark}}</p>
+      <!--p class="text-center commun" ng-repeat="comm in pers[1]">{{comm.date}} : {{comm.mark}}</p-->
     </div>
+
+    <!--div class="person resume_block" ng-repeat="p in pers[0] | filter:queryPerson | orderBy:sortEl"-->
       <p class="text-center bolder">Name: {{p.name}}</p>
       <p class="text-center">Phone: {{p.phone}}</p>
       <p class="text-center">Skype: {{p.skype}}</p>
       <p class="text-center bolder">Skills: {{p.skill}}</p>
       <p class="text-center">Money: {{p.salary}} uhr</p>
       <p class="text-center">ID: {{p.id}}</p>
-    <div class="text-center">
-    <p>
-      <a href="#{{p.id}}">
-        <input type="button" class="btn btn-primary" value="Show"/>
-      </a>
-      <a href="#{{p.id}}/edit">
-        <button type="button" class="btn btn-primary" ng-click="">Edit</button>
-      </a>
-      <a href="#/">
-        <button type="button" class="btn btn-primary" ng-click="removeResume(p)">Delete</button>
-      </a>
-    </p>
+      <div class="text-center">
+        <p>
+          <a href="#{{p.id}}">
+            <input type="button" class="btn btn-primary" value="Show"/>
+          </a>
+          <a href="#{{p.id}}/edit">
+            <button type="button" class="btn btn-primary" ng-click="">Edit</button>
+          </a>
+          <a href="#/">
+            <button type="button" class="btn btn-primary" ng-click="removeResume(p)">Delete</button>
+          </a>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
   <!--table class="resumes">
@@ -133,5 +140,5 @@
         </td>
       </tr>
     </tbody>
-  </table>
-</div-->
+  </table-->
+<!--/div-->

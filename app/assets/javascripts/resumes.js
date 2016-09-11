@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute'])
+angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute', 'ngLoad'])
 .factory("Resume", function($resource) {
   return $resource("/resumes/:id/:action.json", {id: "@id"});
 })
@@ -58,14 +58,59 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
 // })
 
 
+
 .controller('ResumeCtrl', function($scope, Resume, $window, Communication) {
-  $scope.resumes = Resume.query();
-  $scope.communications = Communication.query();
+  $scope.resumes = Resume.query(function(){ $scope.counter = $scope.resumes.length;
+                                            //alert('$scope.resumes - ' + JSON.stringify($scope.resumes[13]));
+                                             });
+  //$scope.counter = $scope.resumes.length;
+  //$scope.comm = 'no';
+
+
+  //$scope.getComm = function(id) { Resume.get({id: id}).$promise
+    //.then(
+      //function (success) {
+        //$scope.comm = id;
+        //$scope.comm = (success.communications) ? success.communications : {};
+        //$scope.comm = (JSON.stringify(success.communications)) ? JSON.stringify(success.communications) : 0;
+      //},
+      //function(error) {
+        //
+      //}
+    //);
+  //};
+
+  // $scope.educ = Education.query(function(){
+  //   for (var i=0;i<$scope.educ.length;i++) {if ($scope.educ[i].resume_id != $routeParams.id) { $scope.educ.splice(i, 1); --i; }}
+  // });
+
+  // $scope.getComm = function(person) {
+  //   var dates = person.date.split(','), marks = person.mark.split(','), $scope.dm = [], i;
+  //   for (i=0;i<dates.length;++i) {
+      
+  //   }
+  // }
+  
+
+  $scope.queryPerson = "";
+  $scope.searchAllow = false;
+  $scope.searchVal = "Search";
+  $scope.searchFunc = function() {
+    $scope.searchAllow = !($scope.searchAllow);
+    $scope.searchVal = ($scope.searchAllow) ? "Hide Search" : "Search";
+    $scope.queryPerson = "";
+  };
+
+  $scope.settings = function(col) {
+    $scope.queryPerson = "";
+    document.getElementsByClassName("dv")[0].className = 'dv ' + col;
+  };
   
   $scope.removeResume = function(res) {
     if (confirm("Are You Sure (delete " + res.name + ")?")) {
       res.$remove();
       $scope.resumes.splice($scope.resumes.indexOf(res), 1);
+      $scope.counter = $scope.resumes.length;
     }
   }
 })
@@ -74,7 +119,6 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
 
 
 .controller('newResumeCtrl', function($scope, Resume, $window, Education, Experience, Communication) {
-
   var counter_skill = 1, counter_proff = 1, counter_lang = 1, counter_comm = 1, counter_educ = 1, counter_job = 1;
 
   $scope.addSkill = function(){
@@ -145,6 +189,20 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
     for (i=0; i<=(skills.length-2); i++) { skills[i].parentNode.removeChild(skills[i]); }
     $scope.newPerson.skill= (str_skills) ? str_skills.slice(0, -1) : "";
 
+    var dates = document.getElementsByName("communDate"), str_dates = "",
+        marks = document.getElementsByName("communValue"), str_marks = "";
+    for (i=0; i<dates.length; i++) { if (dates[i].value && marks[i].value) {
+                                      str_dates += (dates[i].value.toString() + ',');
+                                      str_marks += (marks[i].value.toString() + ',');
+                                      dates[i].value = marks[i].value = "";
+                                    }
+    }
+    if (dates.length > 1) {
+      var comm_div = document.getElementsByClassName("commDiv");
+      for (i=0;i<=(dates.length-2);++i) { comm_div[0].parentNode.removeChild(comm_div[0]);} }
+    $scope.newPerson.date = (str_dates) ? str_dates.slice(0, -1) : "";
+    $scope.newPerson.mark = (str_marks) ? str_marks.slice(0, -1) : "";
+
     var proffs = document.getElementsByName("personProff"), str_proffs = "";
     for (i=0; i<proffs.length; i++) { if (proffs[i].value) { str_proffs += (proffs[i].value + ','); proffs[i].value = ""; } }
     for (i=0; i<=(proffs.length-2); i++) { proffs[i].parentNode.removeChild(proffs[i]); }
@@ -153,8 +211,6 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
     var works = document.getElementsByName("personWork"), str_works = "";
     for (i in works) { if (works[i].checked)  str_works += (works[i].value + ','); }
     $scope.newPerson.work = (str_works) ? str_works.slice(0, -1) : "";
-
-
 
     var str_lang = '', str_level = '', lang = document.getElementsByName("lang"), level =  document.getElementsByName("langLevel");
     for (i=0;i<lang.length;++i) {
@@ -171,7 +227,6 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
       var lang_div = document.getElementsByClassName("langDiv");
       for (i=0;i<=(lang.length-2);++i) { lang_div[0].parentNode.removeChild(lang_div[0]);}
     }
-
 
 
     Resume.save($scope.newPerson)
@@ -201,15 +256,15 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
               for (i=0;i<=(counter_job-2);++i) { job_div[0].parentNode.removeChild(job_div[0]);}
             }
 
-            var date = document.getElementsByName("communDate"), mark =  document.getElementsByName("communValue");
-            for (i=0;i<date.length;++i) {
-              Communication.save({date: date[i].value, mark: mark[i].value, resume_id: success.id}); 
-            }
-            for (i=0;i<date.length;++i) { date[i].value = mark[i].value = ""; }
-            if (date.length > 1) {
-              var comm_div = document.getElementsByClassName("commDiv");
-              for (i=0;i<=(counter_comm-2);++i) { comm_div[0].parentNode.removeChild(comm_div[0]);}
-            }
+            // var date = document.getElementsByName("communDate"), mark =  document.getElementsByName("communValue");
+            // for (i=0;i<date.length;++i) {
+            //   Communication.save({date: date[i].value, mark: mark[i].value, resume_id: success.id}); 
+            // }
+            // for (i=0;i<date.length;++i) { date[i].value = mark[i].value = ""; }
+            // if (date.length > 1) {
+            //   var comm_div = document.getElementsByClassName("commDiv");
+            //   for (i=0;i<=(counter_comm-2);++i) { comm_div[0].parentNode.removeChild(comm_div[0]);}
+            // }
 
 
             $scope.newResume = {};
@@ -221,6 +276,8 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
   }
 
 })
+
+
 
 
 .controller('editResumeCtrl', function ($scope, ResumePut, $routeParams, $window, Education, Experience, Communication) {
@@ -238,33 +295,81 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
     { name: 'Не підходить',       id: 'No',       selected: false }
   ];
 
-  $scope.person = ResumePut.get({ id: $routeParams.id }, function(){
-    var i, j, arr_proffessions = [], arr_status = [];
+  // ResumePut.get({id: $routeParams.id}).$promise
+  //     .then(
+  //       function (success) {
+  //         $scope.person = success.resume;
+  //         $scope.comm = success.communication;
+  //         $scope.educ = success.education;
+  //         $scope.exp = success.experience;
 
-    if ($scope.person.proffession) { 
-      arr_proffessions = $scope.person.proffession.split(',');
-      for (i in arr_proffessions) {
-        for (j in $scope.checkboxProff) { 
-          if (arr_proffessions[i] == $scope.checkboxProff[j].name) {
-            $scope.checkboxProff[j].selected = true;
-          }
+  //       },
+  //       function(error) {
+  //         alert('ERROR EDIT');
+  //       }
+  //     );
+
+  $scope.person = ResumePut.get({ id: $routeParams.id //}, function(){
+    // var i, j, arr_proffessions = [], arr_status = [];
+
+    // if ($scope.person.proffession) { 
+    //   arr_proffessions = $scope.person.proffession.split(',');
+    //   for (i in arr_proffessions) {
+    //     for (j in $scope.checkboxProff) { 
+    //       if (arr_proffessions[i] == $scope.checkboxProff[j].name) {
+    //         $scope.checkboxProff[j].selected = true;
+    //       }
+    //     }
+    //   };
+    // };
+
+
+    // if ($scope.person.status) {
+    //   arr_status = $scope.person.status.split(',');
+    //   for (i in arr_status) {
+    //     for (j in $scope.checkboxStatus) {
+    //       if (arr_status[i] == $scope.checkboxStatus[j].id) {
+    //         $scope.checkboxStatus[j].selected = true;
+    //       }
+    //     }
+    //   };
+    // };
+  })
+  .$promise
+      .then(
+        function (success) {
+          $scope.person = success.resume;
+          $scope.educ = success.education;
+          $scope.exp = success.experience;
+
+          var i, j, arr_proffessions = [], arr_status = [];
+
+          if ($scope.person.proffession) { 
+            arr_proffessions = $scope.person.proffession.split(',');
+            for (i in arr_proffessions) {
+              for (j in $scope.checkboxProff) { 
+                if (arr_proffessions[i] == $scope.checkboxProff[j].name) {
+                  $scope.checkboxProff[j].selected = true;
+                }
+              }
+            };
+          };
+
+          if ($scope.person.status) {
+            arr_status = $scope.person.status.split(',');
+            for (i in arr_status) {
+              for (j in $scope.checkboxStatus) {
+                if (arr_status[i] == $scope.checkboxStatus[j].id) {
+                  $scope.checkboxStatus[j].selected = true;
+                }
+              }
+            };
+          };
+        },
+        function(error) {
+          alert('ERROR EDIT');
         }
-      };
-    };
-
-
-    if ($scope.person.status) {
-      arr_status = $scope.person.status.split(',');
-      for (i in arr_status) {
-        for (j in $scope.checkboxStatus) {
-          if (arr_status[i] == $scope.checkboxStatus[j].id) {
-            $scope.checkboxStatus[j].selected = true;
-          }
-        }
-      };
-    };
-
-  });
+      );
 
  
   $scope.editResume = function (updatedResume) {
@@ -274,7 +379,8 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
           $window.location.href = '/#/' + $scope.person.id;
         },
         function(error) {
-          $window.location.href = '/#';
+          alert('ERROR');
+          //$window.location.href = '/#';
         }
       )
   }
@@ -282,8 +388,23 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
 })
 
 
+
+
+
 .controller('showResumeCtrl', function ($scope, Resume, $routeParams, Education, $window, Experience, Communication) {
-  $scope.person = Resume.get({id: $routeParams.id});
+  //$scope.person = Resume.get({id: $routeParams.id});
+  Resume.get({id: $routeParams.id}).$promise
+      .then(
+        function (success) {
+          $scope.person = success.resume;
+          $scope.educ = success.education;
+          $scope.exp = success.experience;
+
+        },
+        function(error) {
+          alert('ERROR SHOW');
+        }
+      );
   //.$promise
     // .then(
     //   function(success) {
@@ -293,15 +414,15 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
     //     // errors
     //   });
 
-  $scope.educ = Education.query(function(){
-    for (var i=0;i<$scope.educ.length;i++) {if ($scope.educ[i].resume_id != $routeParams.id) { $scope.educ.splice(i, 1); --i; }}
-  });
-  $scope.exp = Experience.query(function(){
-    for (var i=0;i<$scope.exp.length;i++) {if ($scope.exp[i].resume_id != $routeParams.id) { $scope.exp.splice(i, 1); --i; }}
-  });
-  $scope.comm = Communication.query(function(){
-    for (var i=0;i<$scope.comm.length;i++) {if ($scope.comm[i].resume_id != $routeParams.id) { $scope.comm.splice(i, 1); --i; }}
-  });
+  // $scope.educ = Education.query(function(){
+  //   for (var i=0;i<$scope.educ.length;i++) {if ($scope.educ[i].resume_id != $routeParams.id) { $scope.educ.splice(i, 1); --i; }}
+  // });
+  // $scope.exp = Experience.query(function(){
+  //   for (var i=0;i<$scope.exp.length;i++) {if ($scope.exp[i].resume_id != $routeParams.id) { $scope.exp.splice(i, 1); --i; }}
+  // });
+  //$scope.comm = Communication.query(function(){
+    //for (var i=0;i<$scope.comm.length;i++) {if ($scope.comm[i].resume_id != $routeParams.id) { $scope.comm.splice(i, 1); --i; }}
+  //});
 
   $scope.removeResume = function(res) {
     if (confirm("Are You Sure (delete " + res.name + ")?")) {
