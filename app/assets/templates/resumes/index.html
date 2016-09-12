@@ -1,11 +1,11 @@
-<div class= "dv">
-
-  <div class="addPerson">
+<div class= "dv text-center">
+<br/>
+  <div class="addPerson" ng-show='top'>
     <hr/>
     <p class="blue">
     <div class="inline">
       <a href="#new">
-        <button type="button" class="btn btn-default" ng-click="person={}">Додати резюме</button>
+        <input type="button" class="btn btn-primary" value="New"/>
       </a>
     </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -30,7 +30,7 @@
           </select>
         </div>
       </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="#select">
+      <a href="#/">
         <input type="button" class="btn btn-default" ng-click="extSelect()" value="Розширений перегляд"/>
       </a>
     </div>
@@ -84,22 +84,23 @@
     </div>&nbsp;&nbsp;&nbsp;
     <a class="hidden" href="#delete">DELETE</a>
   </p>
-  <hr/>
 
+  <hr/>
+</div>
 
 
 
 
   <p>
-    <a href="#new">
+    <!--a href="#new">
       <input type="button" class="btn btn-primary" value="New"/>
     </a>
-  </p>  
+  </p-->  
   <!--form ng-submit="addResume()">
     <input type="text" ng-model="newResume.name">
     <input type="submit" value="Add">
   </form-->
-  <hr/>
+  <!--hr/-->
   <div class="person resume_block" ng-repeat="p in resumes | filter:queryPerson | orderBy:sortEl">
     <div class="comm_div">
       <!--input type='button' class='btn btn-default' value='Communications'/-->
@@ -129,7 +130,7 @@
       </div>
     </div>
   </div>
-</div>
+<!--/div-->
   <!--table class="resumes">
     <tbody>
       <tr ng-repeat="r in resumes">

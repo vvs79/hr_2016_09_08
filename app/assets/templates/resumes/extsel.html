@@ -1,0 +1,23 @@
+<div ng-if="selPersons.length > 0">
+  <div class="show_div inline" ng-repeat="p in selPersons">
+    <p>Name: <span class="bolder">{{p.name}}</span></p>
+    <p>Skills: <span class="bolder">{{p.skill}}</span></p>
+    <p>Date of Birth: <span>{{p.dateOfBirth}}</span></p>
+    <p>Age: <span>{{p.age}}</span></p>
+    <p>City: <span>{{p.city}}</span></p>
+    <p>Phone: <span>{{p.phone}}</span></p>
+    <p>Skype: <span>{{p.skype}}</span></p>
+    <p>Email: <span>{{p.email}}</span></p>
+    <p>Salary: <span>{{p.salary}} uhr</span></p>
+    <p>Proffession: <span>{{p.proffession}}</span></p>
+    <p>Status: <span>{{p.status}}</span></p>
+    <p>
+        <a href="#edit">
+            <button type="button" class="btn btn-default" ng-click="preEditResume(p.id)">Edit</button>
+        </a>
+    </p>
+   </div>
+</div>
+<div ng-if="selPersons.length == 0">
+    <h3>No resumes</h3>
+</div>

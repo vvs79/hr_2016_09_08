@@ -18,7 +18,7 @@
 @import "bootstrap";
 
 .dv {
-  padding:0 10px;
+  margin:0;
 }
 
 body {
@@ -661,4 +661,8 @@ a:hover {
 
 .comm_div {
   height: 55px;
+}
+
+.content-area {
+  padding:0;
 }

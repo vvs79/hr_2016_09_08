@@ -1,4 +1,5 @@
 <div class="addPerson show_div">
+  <br/><br/>
     <form class="createForm">
         <div class="row" ng-if="alert">
             <div class="col-xs-12">
@@ -74,8 +75,8 @@
             <label><input type="checkbox" name="personWork" value="distance"/>Дистанційна робота</label><br/>
           </div>
         </div>
-
         <br/>
+
 
         <div class="form-group inline border" id="allLangs">
           <h4 for="">Language</h4>
@@ -89,7 +90,7 @@
             <option>Польська</option>
             <option>Іспанська</option>
             <option>Португальська</option>
-          </select><br/>
+          </select>
           <select class="form-control" name="langLevel">
             <option>level</option>
             <option>Високий</option>
@@ -97,16 +98,17 @@
             <option>Середній</option>
             <option>Нище середнього</option>
             <option>Низький</option>
-          </select><br/>
+          </select>
         </div>
         <div class="form-group inline">
           <input type="button" value="+" class="addLang" ng-click="addLang()"/>
         </div>&nbsp;&nbsp;&nbsp;
 
+
         <div class="form-group inline border" id="allCommuns">
           <h4 for="">Співбесіда</h4>
-          <input type="date" class="form-control" name="communDate" placeholder="Дата"/><br/>
-          <input type="number" class="form-control" name="communValue" placeholder="Кількість балів"/><br/>
+          <input type="date" class="form-control" name="communDate" placeholder="Дата"/>
+          <input type="number" class="form-control" name="communValue" placeholder="Кількість балів"/>
         </div>
         <div class="form-group inline">
           <input type="button" value="+" class="addCommun" ng-click="addCommun()"/>

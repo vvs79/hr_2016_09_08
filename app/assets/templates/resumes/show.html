@@ -1,24 +1,151 @@
 <div class="show_div">
-  <p>Name: <span class="bolder">{{person.name}}</span></p>
-  <p>Date of Birth: <span>{{person.dateOfBirth}}</span></p>
-  <p>Age: <span>{{person.age}}</span></p>
-  <p>City: <span>{{person.city}}</span></p>
-  <p>Phone: <span>{{person.phone}}</span></p>
-  <p>Skype: <span>{{person.skype}}</span></p>
-  <p>Email: <span>{{person.email}}</span></p>
-  <p>Salary: <span>{{person.salary}} uhr</span></p>
-  <p>Proffession: <span>{{person.proffession}}</span></p>
-  <p>Status: <span>{{person.status}}</span></p>
-  <p>Skill: <span>{{person.skill}}</span></p>
-  <p>Language: <span>{{person.language}}</span></p>
-  <p>Level: <span>{{person.level}}</span></p>
-  <p>Work: <span>{{person.work}}</span></p>
-  <p>Proff: <span>{{person.proff}}</span></p>
+  <br/><br/>
+        <div class="form-group inline">
+            <label for="">Name</label>
+            <input type="text" class="form-control" name="personName" ng-model="person.name" readonly/>
+        </div>
 
-  <p ng-repeat='c in comm'>Communication <span>date: {{c.date}} - mark: {{c.mark}}</span></p>
-  <p>Comment: <span>{{person.comment}}</span></p>
-  <p>Education: <span ng-repeat='ed in educ'>{{ed.specialty}} : {{ed.from}} : {{ed.to}} : {{ed.place}}<br/></span></p>
-  <p>Experience: <span ng-repeat='ex in exp'>{{ex.specialty}} : {{ex.from}} : {{ex.to}} : {{ex.place}}<br/></span></p>
+        <div class="form-group inline">
+            <label for="">Date of Birth</label>
+            <input type="date" class="form-control" name="personDate" ng-model="person.dateofbirth" readonly/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">Age</label>
+            <input type="number" class="form-control" name="personAge" ng-model="person.age" readonly/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">City</label>
+            <input type="text" class="form-control" name="personCity" ng-model="person.city" readonly/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">Phone</label>
+            <input type="text" class="form-control" name="personPhone" ng-model="person.phone" readonly/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">Skype</label>
+            <input type="text" class="form-control" name="personSkype" ng-model="person.skype" readonly/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">Email</label>
+            <input type="email" class="form-control" name="personEmail" ng-model="person.email" readonly/>
+        </div>
+
+        <div class="form-group inline">
+            <label for="">Salary</label>
+            <input type="number" class="form-control" name="personSalary" ng-model="person.salary" readonly/>
+        </div>
+        <br/>
+
+
+
+        <div class="form-group inline">
+          <div ng-repeat='sk in skills'>
+            <label for="">Skill<input type="text" class="form-control" name="personSkill" value='{{sk}}' readonly/></label>
+          </div>
+        </div>&nbsp;&nbsp;&nbsp;
+
+
+        <div class="form-group inline">
+          <div ng-repeat='pr in proffs'>
+            <label for="">Професійні навички<input type="text" class="form-control" name="personProff" value="{{pr}}" readonly/></label>
+          </div>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <div class="form-group inline border">
+          <h4>Зайнятість</h4>
+          <div class="checkbox">
+            <p ng-repeat="w in checkboxWork">
+              <label><input type="checkbox" name="editWork" value="{{w.id}}" ng-model="w.selected" disabled/>{{w.name}}</label>
+            </p>
+          </div>
+        </div>
+        <br/>
+
+
+        <div class="form-group inline border" id="allLangs" ng-repeat='l in arr_ll'>
+          <h4 for="">Language</h4>
+          <input type="text" class="form-control" name="lang" value='{{l.lang}}' readonly/>
+          <input type="text" class="form-control" name="langLevel" value='{{l.level}}' readonly/>
+          <!--select class="form-control" name="lang">
+            <option>{{l.lang}}</option>
+            <option>Англійська</option>
+            <option>Російська</option>
+            <option>Німецька</option>
+            <option>Французька</option>
+            <option>Італійська</option>
+            <option>Польська</option>
+            <option>Іспанська</option>
+            <option>Португальська</option>
+          </select>
+          <select class="form-control" name="langLevel">
+            <option>{{l.level}}</option>
+            <option>Високий</option>
+            <option>Вище середнього</option>
+            <option>Середній</option>
+            <option>Нище середнього</option>
+            <option>Низький</option>
+          </select-->
+        </div>&nbsp;&nbsp;&nbsp;
+        <br/>
+
+
+        <div class="form-group inline border" ng-repeat='c in comm'>
+          <h4 for="">Співбесіда</h4>
+          <input type="date" class="form-control" name="communDate" value='{{c.date}}' readonly/>
+          <input type="number" class="form-control" name="communValue" value='{{c.mark}}' readonly/>
+        </div>
+        <br/>
+
+        <div class="form-group inline border" ng-repeat='ed in educ'>
+          <h4 for="">Education</h4>
+          <input type="text" class="form-control" name="education" value='{{ed.specialty}}' readonly/>
+          <label for="">From</label>
+          <input type="date" class="form-control" name="educationFrom" value='{{ed.from}}' readonly/>
+          <label for="">To</label>
+          <input type="date" class="form-control" name="educationTo" value='{{ed.to}}' readonly/>
+          <input type="text" class="form-control" name="educationPlace" value='{{ed.place}}' readonly/>
+        </div>&nbsp;&nbsp;&nbsp;
+        <br/>
+
+        <div class="form-group inline border" ng-repeat='ex in exp'>
+          <h4 for="">Experience</h4>
+          <input type="text" class="form-control" name="job" value='{{ex.specialty}}' readonly/>
+          <label for="">From</label>
+          <input type="date" class="form-control" name="jobFrom" value='{{ex.from}}' readonly/>
+          <label for="">To</label>
+          <input type="date" class="form-control" name="jobTo" value='{{ex.to}}' readonly/>
+          <input type="text" class="form-control" name="jobPlace" value='{{ex.place}}' readonly/>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+        <div class="form-group border inline">
+            <h4>Професія</h4>
+            <div class="checkbox">
+                <p ng-repeat="proff in checkboxProff">
+                    <label><input type="checkbox" name="editProff" value="{{proff.name}}" ng-model="proff.selected" disabled/>{{proff.name}}</label>
+                </p>
+            </div><hr/>
+            <h4>Статус</h4>
+            <div class="checkbox">
+                <p ng-repeat="st in checkboxStatus">
+                    <label><input type="checkbox" name="editStatus" value="{{st.id}}" ng-model="st.selected" disabled/>{{st.name}}</label>
+                </p>
+            </div>
+        </div>
+
+      <br/>
+
+      <div class="" id="comment">
+        <h4 for="">Коментарі</h4>
+        <textarea class="form-control" rows="7" name="comment" ng-model="person.comment" readonly/></textarea>
+      </div>
+      <br/>
 
   <p>
     <a href="#{{person.id}}/edit">
