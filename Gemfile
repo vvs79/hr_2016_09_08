@@ -27,6 +27,8 @@ gem 'angularjs-rails'
 gem 'angular-rails-templates'
 gem 'sprockets', '2.12.3'
 
+gem 'angularjs-file-upload-rails', '~> 2.2.0'
+
 group :development, :test do
   gem 'mysql2'
   gem 'byebug', '3.4.0'

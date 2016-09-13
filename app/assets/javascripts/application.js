@@ -17,6 +17,7 @@
 //= require angular-resource
 //= require angular-route
 //= require angular-rails-templates
+//= require angularjs-file-upload
 //= require resumes
 //= ng-load
 //= require ui-bootstrap

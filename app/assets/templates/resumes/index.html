@@ -31,11 +31,11 @@
         </div>
       </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <a href="#/">
-        <input type="button" class="btn btn-default" ng-click="extSelect()" value="Розширений перегляд"/>
+        <input type="button" class="btn btn-default" ng-click="extSelect()" value="Extended search"/>
       </a>
     </div>
     </div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Всього: {{counter}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total resumes: {{counter}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <br/><br/>
     <input type="text" ng-show="searchAllow" ng-model="queryPerson" placeholder="Search..."/>
     <input type="button" class="btn btn-default" value={{searchVal}} ng-click="searchFunc()" />
@@ -44,7 +44,7 @@
     <div class="dropdown inline" id="sort">
       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="true">
-        СОРТУВАННЯ
+        Sorting
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -57,7 +57,7 @@
     <div class="dropdown inline">
       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="true">
-        НАЛАШТУВАННЯ
+        Settings
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
@@ -69,9 +69,9 @@
     </div>
 
     &nbsp;&nbsp;&nbsp;<a class="hidden" href="#/">НАЛАШТУВАННЯ</a>&nbsp;&nbsp;&nbsp;
-    <a href="#/">
+    <!--a href="#/">
       <input type="button" class="btn btn-default" value="ВСІ РЕЗЮМЕ" ng-click="allFunc()"/>
-    </a>
+    </a-->
 
     <div class="dropdown inline hidden">
       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

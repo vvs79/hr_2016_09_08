@@ -5,4 +5,6 @@ class Resume < ActiveRecord::Base
   has_many   :communications
 
   validates :name, presence: true
+
+  mount_uploader :file, FileUploader
 end

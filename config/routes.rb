@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users#, controllers: { registrations: 'users/registrations' }
 
   devise_scope :user do
     unauthenticated do
@@ -7,9 +7,10 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :admin do
-    resources :users
-  end
+  # namespace :admin do
+  #   resources :users
+  # end
+  resources :users
 
   # devise_for :users
   root 'resumes#index'

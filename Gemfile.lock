@@ -41,6 +41,7 @@ GEM
       railties (>= 3.1)
       sprockets (~> 2)
       tilt
+    angularjs-file-upload-rails (2.2.0)
     angularjs-rails (1.2.26)
     ansi (1.5.0)
     arel (6.0.3)
@@ -400,6 +401,7 @@ PLATFORMS
 
 DEPENDENCIES
   angular-rails-templates
+  angularjs-file-upload-rails (~> 2.2.0)
   angularjs-rails
   aws-sdk (= 1.6.0)
   bcrypt (= 3.1.7)
@@ -439,4 +441,4 @@ DEPENDENCIES
   will_paginate (= 3.0.7)
 
 BUNDLED WITH
-   1.10.6
+   1.12.5

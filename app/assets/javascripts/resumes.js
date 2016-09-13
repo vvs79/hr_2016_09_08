@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute', 'ngLoad'])
+angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute', 'ngLoad', 'angularFileUpload'])
 .factory("Resume", function($resource) {
   return $resource("/resumes/:id/:action.json", {id: "@id"});
 })
@@ -133,8 +133,10 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
 
 
 
-.controller('newResumeCtrl', function($scope, Resume, $window, Education, Experience, Communication) {
+.controller('newResumeCtrl', function($scope, Resume, $window, Education, Experience, Communication, FileUploader) {
   var counter_skill = 1, counter_proff = 1, counter_lang = 1, counter_comm = 1, counter_educ = 1, counter_job = 1;
+
+  //alert($upload);
 
   $scope.addSkill = function(){
     if (counter_skill < 3)  {
@@ -191,6 +193,19 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
   };
 
   $scope.addResume = function() {
+    // $scope.upload = function(file){
+    //   Upload.upload({
+    //     url: '/uploads',
+    //     method: 'POST',
+    //     fields: {
+    //       'resume[user_id]': currentUserId
+    //       },
+    //       file: file,
+    //       fileFormDataName: 'resume[file]'
+    //   });
+    // };
+    //$scope.newPerson.file = new FileUploader({url: '/uploads'});
+
     var proffessions = document.getElementsByName("proffession"), str_proffessions = "", i;
     for (i in proffessions) { if (proffessions[i].checked) str_proffessions += (proffessions[i].value + ',');  }
     $scope.newPerson.proffession = (str_proffessions) ? str_proffessions.slice(0, -1) : "";
@@ -228,6 +243,8 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
       var lang_div = document.getElementsByClassName("langDiv");
       for (i=0;i<=(lang.length-2);++i) { lang_div[0].parentNode.removeChild(lang_div[0]);}
     }
+
+
 
 
     Resume.save($scope.newPerson)
@@ -389,7 +406,7 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
 
     var str_lang = '', str_level = '', lang = document.getElementsByName("lang"), level =  document.getElementsByName("langLevel");
     for (i=0;i<lang.length;++i) {
-      if (lang[i].value != 'language') { 
+      if (lang[i].value != 'add language') { 
         str_lang += (lang[i].value + ',');
         str_level += (level[i].value + ',');
         //lang[i].value = level[i].value = "";
@@ -546,7 +563,7 @@ angular.module("appResume", ['ngResource', 'ui.bootstrap', 'templates', 'ngRoute
   //});
   $scope.removeResume = function(res) {
     if (confirm("Are You Sure (delete " + res.name + ")?")) {
-      res.$remove();
+      Resume.delete({ id: res.id });
       $window.location.href = '/#';
     }
   }

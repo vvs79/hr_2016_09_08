@@ -23,6 +23,7 @@ class ResumesController < ApplicationController
 
   def create
     @resume = Resume.new(resume_params)
+    # @resume.file = params[:file]
     if @resume.save
       render json: { id: @resume.id }
     else
@@ -56,6 +57,6 @@ class ResumesController < ApplicationController
   private
 
     def resume_params
-      params.require(:resume).permit(:name, :age, :email, :skype, :salary, :city, :phone, :dateofbirth, :comment, :proffession, :status, :skill, :work, :proff, :language, :level, :date, :mark)
+      params.require(:resume).permit(:user_id, :name, :file, :age, :email, :skype, :salary, :city, :phone, :dateofbirth, :comment, :proffession, :status, :skill, :work, :proff, :language, :level, :date, :mark)
     end
 end
